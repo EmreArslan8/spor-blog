@@ -266,4 +266,162 @@ const STATS = [
   { value: "4.9", label: "Okuyucu puanı" },
 ];
 
-window.SITE_DATA = { CATEGORIES, POSTS, STATS, FAQ };
+/* ------------------------------------------------------------
+   Yazı içerikleri — her yazı için özgün, zengin gövde.
+   intro: giriş paragrafı | takeaways: öne çıkanlar
+   body: bölümlerden oluşan HTML
+   ------------------------------------------------------------ */
+const AUTHORS = {
+  "Deniz Yılmaz": "Beslenme ve takviye içerikleri üzerine yazan spor bilimci. 8 yıldır sporcularla çalışıyor.",
+  "Elif Kaya": "Egzersiz fizyolojisi uzmanı. Performans takviyeleri ve antrenman biliminde uzmanlaşmıştır.",
+  "Dr. Mert Aydın": "Beslenme ve diyetetik doktoru. Mikrobesin eksiklikleri üzerine araştırmalar yürütüyor.",
+  "Selin Demir": "Sağlık editörü ve diyetisyen. Kilo yönetimi ve metabolizma konularında içerik üretir.",
+};
+
+const POST_CONTENT = {
+  1: {
+    intro: "Whey protein, dünyada en çok araştırılan ve en çok kullanılan spor takviyelerinden biri. Peki bu kadar popüler olması boşuna mı? Yeni başlayanlar için türlerini, dozunu ve zamanlamasını sade bir dille topladık.",
+    takeaways: ["Whey; konsantre, izolat ve hidrolizat olmak üzere üç ana forma sahiptir.", "Günlük protein hedefini tamamlamak için pratik bir araçtır, sihirli bir toz değildir.", "Zamanlamadan çok, gün boyu toplam protein alımı önemlidir."],
+    body: [
+      "<h2>Whey protein tam olarak nedir?</h2>",
+      "<p>Whey (peynir altı suyu proteini), sütün peynire dönüşmesi sırasında ayrışan sıvı kısımdan elde edilir. Tam bir amino asit profiline sahiptir ve özellikle kas onarımında rol oynayan <strong>lösin</strong> bakımından zengindir. Hızlı sindirilmesi, onu antrenman çevresinde pratik bir seçenek yapar.</p>",
+      "<h2>Türleri arasındaki fark</h2>",
+      "<ul class='dots'><li><strong>Konsantre:</strong> En yaygın ve ekonomik form; %70–80 protein içerir, az miktarda laktoz ve yağ barındırır.</li><li><strong>İzolat:</strong> Daha ileri filtrelenmiştir; %90+ protein, çok düşük laktoz. Laktoz hassasiyeti olanlar için uygundur.</li><li><strong>Hidrolizat:</strong> Ön-sindirilmiş form; en hızlı emilir, genelde en pahalısıdır.</li></ul>",
+      "<h2>Ne kadar ve ne zaman?</h2>",
+      "<p>Genel öneri, günlük <strong>1.6–2.2 g/kg</strong> protein almaktır. Bunu önce gerçek besinlerden karşılamayı hedefle; açık kalırsa whey ile tamamla. Tek seferde 20–40 g tipik bir servistir.</p>",
+      "<blockquote>Antrenmandan hemen sonraki 'anabolik pencere' abartılmıştır. Asıl belirleyici, gün içindeki toplam protein alımıdır.</blockquote>",
+    ],
+  },
+  2: {
+    intro: "Kreatin, üzerinde en çok çalışma yapılmış ve güvenliği en net kanıtlanmış performans takviyesidir. Etkisi 'hissedilen' değil, ölçülebilen bir takviyeden bahsediyoruz.",
+    takeaways: ["Kısa süreli, yüksek şiddetli eforda güç ve tekrar sayısını artırır.", "Günde 3–5 g monohidrat çoğu kişi için yeterlidir; yükleme şart değildir.", "Su tutulumu kaynaklı hafif kilo artışı normaldir ve kas kaybı değildir."],
+    body: [
+      "<h2>Nasıl çalışır?</h2>",
+      "<p>Kaslarda <strong>fosfokreatin</strong> deposunu artırarak, ATP'nin (hücresel enerji) hızlı yeniden üretimini destekler. Bu da özellikle 1–10 saniyelik patlayıcı eforlarda daha fazla tekrar ve daha yüksek güç anlamına gelir.</p>",
+      "<h2>Doz ve kullanım</h2>",
+      "<ul class='dots'><li><strong>Basit yol:</strong> Her gün 3–5 g, günün herhangi bir saatinde.</li><li><strong>Yükleme (opsiyonel):</strong> 5–7 gün boyunca günde 20 g (4'e bölünmüş), sonra 3–5 g idame.</li><li>Kafeinle birlikte alınması etkisini önemli ölçüde azaltmaz.</li></ul>",
+      "<h2>Güvenlik</h2>",
+      "<p>Sağlıklı bireylerde uzun dönem kullanımı güvenli bulunmuştur. Böbrek rahatsızlığın varsa hekimine danış. 'Kreatin böbreklere zarar verir' söylemi, sağlıklı kişilerde bilimsel destekten yoksundur.</p>",
+    ],
+  },
+  3: {
+    intro: "D vitamini yalnızca kemik sağlığı için değil; kas fonksiyonu, bağışıklık ve toparlanma için de kritik. Özellikle kış aylarında sporcularda eksikliği yaygındır.",
+    takeaways: ["Güneşe sınırlı maruz kalan sporcularda eksiklik sık görülür.", "Eksiklik; yorgunluk, sık hastalanma ve performans düşüşüyle ilişkilidir.", "Takviyeye başlamadan önce kan değerini ölçtürmek en doğrusudur."],
+    body: [
+      "<h2>Neden bu kadar önemli?</h2>",
+      "<p>D vitamini bir hormon gibi davranır ve yüzlerce genin ifadesinde rol oynar. Kas liflerindeki reseptörleri aracılığıyla <strong>kas gücü ve toparlanmayı</strong> etkiler. Düşük seviyeler, antrenman verimini sessizce düşürebilir.</p>",
+      "<h2>Belirtiler ve risk grupları</h2>",
+      "<ul class='dots'><li>Kapalı alanda antrenman yapan sporcular</li><li>Koyu ten tonuna sahip bireyler</li><li>Kuzey enlemlerde yaşayanlar ve kış ayları</li></ul>",
+      "<h2>Ne yapmalı?</h2>",
+      "<p>Önce <strong>25-OH D vitamini</strong> kan testi yaptır. Eksiklik varsa, hekimin önerdiği dozda takviye ve mümkünse düzenli güneşlenme en etkili kombinasyondur.</p>",
+    ],
+  },
+  4: {
+    intro: "'Yağ yakıcı' etiketi çok şey vaat eder ama gerçek beklentiden çoğu zaman uzaktır. İşte pazarlama gürültüsünün altındaki 7 gerçek.",
+    takeaways: ["Hiçbir takviye, kalori açığı olmadan yağ yakmaz.", "Etkileri genelde küçük ve destekleyicidir, belirleyici değildir.", "Yüksek kafein içerikleri uyku ve kaygıyı olumsuz etkileyebilir."],
+    body: [
+      "<h2>1–3: Temel gerçekler</h2>",
+      "<ul class='dots'><li>Termojenikler metabolizmayı hafifçe hızlandırır; bu fark günlük birkaç yüz kaloriyi geçmez.</li><li>Kalori açığı olmadan hiçbir etki kalıcı yağ kaybına dönüşmez.</li><li>Çoğu formül, ana etkisini yüksek doz <strong>kafeinden</strong> alır.</li></ul>",
+      "<h2>4–7: Dikkat edilmesi gerekenler</h2>",
+      "<ul class='dots'><li>Akşam kullanımı uyku kalitesini bozabilir; uyku ise yağ kaybının gizli kahramanıdır.</li><li>Tolerans gelişir; sürekli artan dozlar sürdürülebilir değildir.</li><li>Kalp çarpıntısı, huzursuzluk gibi yan etkiler olabilir.</li><li>Etiketteki 'gizli karışım' (proprietary blend) içerik dozunu gizleyebilir.</li></ul>",
+      "<blockquote>Yağ yakıcı bir takviye değil, kalori açığı + protein + uyku + hareket kombinasyonudur.</blockquote>",
+    ],
+  },
+  5: {
+    intro: "BCAA yıllarca popüler oldu, ama bilim EAA lehine ilerledi. İkisi arasındaki farkı ve senin için hangisinin mantıklı olduğunu netleştirelim.",
+    takeaways: ["BCAA, 9 esansiyel amino asidin yalnızca 3'ünü içerir.", "Kas protein sentezi için tüm esansiyel amino asitler (EAA) gerekir.", "Yeterli protein alan biri için ikisi de çoğu zaman gereksizdir."],
+    body: [
+      "<h2>Tanımlar</h2>",
+      "<p><strong>BCAA</strong> (dallı zincirli): lösin, izolösin, valin. <strong>EAA</strong> (esansiyel): bu üçü dahil, vücudun üretemediği 9 amino asidin tamamı.</p>",
+      "<h2>Neden EAA öne çıktı?</h2>",
+      "<p>Kas protein sentezini tetiklemek için lösin şarttır, ancak yapı taşlarının <strong>tamamı</strong> olmadan sentez sürdürülemez. Bu yüzden tek başına BCAA, EAA kadar etkili değildir.</p>",
+      "<h2>Kime gerekli?</h2>",
+      "<ul class='dots'><li>Günlük protein hedefini rahat karşılayan biri: genelde gerek yok.</li><li>Aç karına antrenman yapan veya vegan/düşük protein alan sporcular: EAA mantıklı olabilir.</li></ul>",
+    ],
+  },
+  6: {
+    intro: "Omega-3, eklem konforu ve genel sağlık için en çok konuşulan yağ asitleri. Ama her balık yağı ürünü aynı değil; kalite ve doz belirleyici.",
+    takeaways: ["EPA ve DHA, omega-3'ün asıl etkili formlarıdır.", "Eklem sertliğini ve antrenman sonrası ağrıyı azaltmaya yardımcı olabilir.", "Etiketteki toplam yağ değil, EPA+DHA miktarı önemlidir."],
+    body: [
+      "<h2>EPA & DHA farkı</h2>",
+      "<p>Bir balık yağı kapsülünde '1000 mg' yazması, o kadar omega-3 aldığın anlamına gelmez. Asıl bakman gereken, kapsül başına <strong>EPA + DHA</strong> toplamıdır.</p>",
+      "<h2>Eklem sağlığına etkisi</h2>",
+      "<p>Omega-3'ün anti-inflamatuar etkisi, yoğun antrenman yapanlarda eklem konforunu ve toparlanmayı destekleyebilir. Etki dramatik değil, ama tutarlı kullanımda anlamlıdır.</p>",
+      "<h2>Kaliteli ürün seçimi</h2>",
+      "<ul class='dots'><li>Kapsül başına yüksek EPA+DHA</li><li>Oksidasyon (bozulma) değeri düşük, tazelik sertifikalı ürünler</li><li>Ağır metal arındırma testinden geçmiş markalar</li></ul>",
+    ],
+  },
+  7: {
+    intro: "Pre-workout ürünleri enerji vaat eder, ama içerik listeleri çoğu zaman karmaşık ve abartılıdır. Hangi bileşen ne işe yarıyor, sade bir rehber.",
+    takeaways: ["Etkili bileşenler genelde kafein, sitrülin ve beta-alanindir.", "'Gizli karışım' etiketleri doz şeffaflığını gizleyebilir.", "Akşam antrenmanlarında yüksek kafein uykuyu bozabilir."],
+    body: [
+      "<h2>İşe yarayan bileşenler</h2>",
+      "<ul class='dots'><li><strong>Kafein:</strong> Odak ve algılanan eforu iyileştirir (etkili doz 3–6 mg/kg).</li><li><strong>L-sitrülin:</strong> Kan akışını ve pompayı destekler (6–8 g).</li><li><strong>Beta-alanin:</strong> Dayanıklılığa yardımcı olur; ciltte karıncalanma normaldir.</li></ul>",
+      "<h2>Dikkat edilecekler</h2>",
+      "<p>Doz şeffaf olmayan formüllerden kaçın. Kafein toleransın düşükse, akşam seansları için kafeinsiz seçenekleri değerlendir.</p>",
+      "<blockquote>İyi bir uyku ve öğün, çoğu pre-workout'tan daha güçlü bir 'enerji takviyesidir'.</blockquote>",
+    ],
+  },
+  8: {
+    intro: "Magnezyum; kas kasılması, sinir iletimi ve uyku için gerekli, ama sporcularda sıkça eksik kalan bir mineral. Doğru form ve zamanlama fark yaratır.",
+    takeaways: ["Terle magnezyum kaybı sporcularda eksikliği artırır.", "Kramp ve uyku kalitesiyle ilişkilidir.", "Emilimi yüksek formlar (sitrat, glisinat) tercih edilmelidir."],
+    body: [
+      "<h2>Neden sporcularda önemli?</h2>",
+      "<p>Magnezyum 300'den fazla enzimatik tepkimede görev alır. Yoğun terleme ve stres, ihtiyacı artırırken depoları azaltır. Eksiklik; kramp, huzursuzluk ve kötü uyku olarak kendini gösterebilir.</p>",
+      "<h2>Hangi form?</h2>",
+      "<ul class='dots'><li><strong>Magnezyum sitrat:</strong> İyi emilir, ekonomik.</li><li><strong>Magnezyum glisinat:</strong> Mideyi az yorar, uyku için tercih edilir.</li><li>Oksit formu ucuzdur ama emilimi düşüktür.</li></ul>",
+      "<h2>Ne zaman almalı?</h2>",
+      "<p>Uyku kalitesi için akşam, yemekle birlikte almak yaygın ve etkili bir yaklaşımdır.</p>",
+    ],
+  },
+  9: {
+    intro: "Kilo almakta zorlananlar (hardgainer) için mesele iştah ve kalori. Mass gainer bu açığı kapatmanın pratik bir yolu olabilir, ama bilinçli kullanılmalı.",
+    takeaways: ["Gainer, esasen yoğun kalori ve karbonhidrat kaynağıdır.", "Gerçek besinlerin yerini almamalı, açığı kapatmalıdır.", "Şeker oranı yüksek ürünlerden kaçınmak gerekir."],
+    body: [
+      "<h2>Kime uygun?</h2>",
+      "<p>Bol yemesine rağmen kilo alamayan, hızlı metabolizmalı kişiler için gainer, günlük kalori hedefine ulaşmayı kolaylaştırır. Zaten kolay kilo alanlar için gereksizdir.</p>",
+      "<h2>Nasıl seçmeli?</h2>",
+      "<ul class='dots'><li>Kaliteli karbonhidrat kaynağı (yulaf gibi), aşırı şeker değil</li><li>Yeterli protein oranı (servis başına 25–50 g)</li><li>Sindirimi kolay bir formül</li></ul>",
+      "<h2>Ev yapımı alternatif</h2>",
+      "<p>Yulaf, süt, muz, fıstık ezmesi ve whey ile hazırlanan bir smoothie, çoğu ticari gainerle yarışabilir ve daha ekonomiktir.</p>",
+    ],
+  },
+  10: {
+    intro: "Glutamin, vücutta en bol bulunan amino asit. Toparlanma ve bağışıklık için pazarlanır, ama kanıtlar sağlıklı sporcular için beklenenden mütevazı.",
+    takeaways: ["Vücut glutamini kendi üretebilir (şartlı esansiyel).", "Yoğun stres/hastalık dışında ek fayda sınırlı olabilir.", "Bağırsak ve bağışıklık sağlığıyla ilişkilendirilir."],
+    body: [
+      "<h2>Ne işe yarar?</h2>",
+      "<p>Glutamin, bağışıklık hücreleri ve bağırsak epiteli için önemli bir yakıttır. Çok yoğun antrenman dönemlerinde depoları geçici olarak azalabilir.</p>",
+      "<h2>Kanıt ne diyor?</h2>",
+      "<p>Sağlıklı ve yeterli protein alan sporcularda, kas gelişimi veya performans üzerindeki etkisi genelde <strong>küçüktür</strong>. Asıl fayda; ağır stres, yaralanma veya hastalık dönemlerinde görülebilir.</p>",
+      "<h2>Kimler değerlendirebilir?</h2>",
+      "<ul class='dots'><li>Çok yüksek hacimli antrenman yapanlar</li><li>Sindirim/bağışıklık desteği arayan bireyler (hekim önerisiyle)</li></ul>",
+    ],
+  },
+  11: {
+    intro: "Çinko; bağışıklık, hormon dengesi ve toparlanma için kritik bir eser element. Özellikle kış aylarında ve yoğun antrenman dönemlerinde önemi artar.",
+    takeaways: ["Çinko eksikliği bağışıklığı zayıflatır.", "Terle kayıp yaşandığından sporcularda ihtiyaç artabilir.", "Aşırı doz bakır emilimini bozabilir; ölçülü kullanılmalı."],
+    body: [
+      "<h2>Bağışıklıktaki rolü</h2>",
+      "<p>Çinko, bağışıklık hücrelerinin normal çalışması için gereklidir. Eksikliğinde enfeksiyonlara yatkınlık artar; bu da antrenman düzenini bozar.</p>",
+      "<h2>Sporcu için önemi</h2>",
+      "<p>Yoğun egzersiz ve terleme çinko kaybını artırır. Kış aylarında dengeli beslenme + gerektiğinde ölçülü takviye, bağışıklık için akıllıca bir kombinasyondur.</p>",
+      "<h2>Dikkat</h2>",
+      "<blockquote>Uzun süre yüksek doz çinko, bakır eksikliğine yol açabilir. 'Çok daha iyidir' mantığı burada geçerli değildir.</blockquote>",
+    ],
+  },
+  12: {
+    intro: "L-karnitin, yağ metabolizmasındaki rolüyle bilinir ve sıkça 'yağ yakıcı' olarak pazarlanır. Gerçek etkisi ise beklentiden daha nüanslı.",
+    takeaways: ["Yağ asitlerinin hücre içinde enerjiye dönüşmesinde rol oynar.", "Tek başına dramatik yağ kaybı sağlamaz.", "Etkisi düzenli egzersizle birlikte anlam kazanır."],
+    body: [
+      "<h2>Biyolojik rolü</h2>",
+      "<p>L-karnitin, yağ asitlerini hücrelerin enerji santrali olan <strong>mitokondriye</strong> taşır. Teorik olarak bu, yağın yakıt olarak kullanımını destekler.</p>",
+      "<h2>Efsane mi, gerçek mi?</h2>",
+      "<p>Takviye olarak alındığında etkisi genelde <strong>mütevazıdır</strong> ve ancak düzenli egzersiz + kalori açığıyla birlikte fark yaratabilir. Tek başına 'yağ eritici' beklentisi gerçekçi değildir.</p>",
+      "<h2>Kullanım</h2>",
+      "<ul class='dots'><li>Genelde 1–2 g/gün dozunda kullanılır.</li><li>Kardiyo ile birleştirildiğinde daha anlamlı olabilir.</li></ul>",
+    ],
+  },
+};
+
+window.SITE_DATA = { CATEGORIES, POSTS, STATS, FAQ, AUTHORS, POST_CONTENT };
