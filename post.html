@@ -6,7 +6,7 @@
   <title>Yazı — Ferah</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
   <style>
@@ -37,6 +37,16 @@
     .related { margin-top: 20px; }
     .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--brand-strong); font-weight: 600; margin-bottom: 8px; }
     .back-link svg { width: 18px; height: 18px; }
+    /* Yazar & fiyat (ürün kutusuna özel) */
+    .article-meta .card-author { display: flex; align-items: center; gap: 10px; }
+    .article-meta .card-author img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+    .article-meta .card-author .an { color: var(--text); font-weight: 600; }
+    .price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+    .price .now { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--text); }
+    .price .now::after { content: " ₺"; font-size: .8em; color: var(--text-soft); }
+    .price .old { font-size: .9rem; color: var(--text-mute); text-decoration: line-through; }
+    .discount-badge { padding: 4px 10px; border-radius: var(--radius-pill); background: var(--accent-soft); color: var(--accent); font-size: .78rem; font-weight: 700; }
+    .product-cta .shop-link { flex: 0 0 auto; }
   </style>
 </head>
 <body>
@@ -135,7 +145,7 @@
             '<img src="' + post.image + '" alt="' + post.title + '">' +
             '<div class="pc-info"><span class="k">Önerilen ürün</span><h4>' + post.title.split(":")[0] + '</h4>' +
               '<div class="price"><span class="now">' + post.price + '</span>' + (post.oldPrice ? '<span class="old">' + post.oldPrice + ' ₺</span>' : "") + (discount ? ' <span class="discount-badge" style="position:static">%' + discount + " indirim</span>" : "") + "</div></div>" +
-            '<a class="shop-btn btn-lg" href="' + post.shopUrl + '" data-shop="' + post.title + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg> Mağazada İncele</a>' +
+            '<a class="shop-link boxed" href="' + post.shopUrl + '" data-shop="' + post.title + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg> Mağazada İncele</a>' +
           "</div>" +
         "</div>" +
         '<div class="tags">' + post.tags.map(function (t) { return '<a href="index.html#blog">#' + t + "</a>"; }).join("") + "</div>";
@@ -145,8 +155,14 @@
       if (related.length < 3) related = related.concat(P.filter(function (p) { return p.id !== post.id && related.indexOf(p) === -1; })).slice(0, 3);
 
       document.getElementById("posts").innerHTML = related.map(function (p) {
-        var d = p.oldPrice ? Math.round((1 - Number(p.price) / Number(p.oldPrice)) * 100) : 0;
-        return '<article class="card reveal in"><a class="card-media" href="post.html?id=' + p.id + '"><img src="' + p.image + '" alt="' + p.title + '" loading="lazy"><span class="card-cat">' + p.categoryLabel + "</span>" + (d ? '<span class="discount-badge">%' + d + " indirim</span>" : "") + '</a><div class="card-body"><div class="card-meta"><span>' + p.date + '</span></div><h3><a href="post.html?id=' + p.id + '">' + p.title + '</a></h3><p class="excerpt">' + p.excerpt + '</p><div class="card-foot"><div class="price"><span class="now">' + p.price + "</span></div><a class=\"shop-btn\" href=\"" + p.shopUrl + "\" data-shop=\"" + p.title + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg> Ürüne Git</a></div></div></article>';
+        return '<article class="card reveal in">' +
+          '<a class="card-media" href="post.html?id=' + p.id + '"><img src="' + p.image + '" alt="' + p.title + '" loading="lazy"></a>' +
+          '<div class="card-body"><span class="kicker">' + p.categoryLabel + '</span>' +
+          '<h3><a href="post.html?id=' + p.id + '">' + p.title + '</a></h3>' +
+          '<p class="excerpt">' + p.excerpt + '</p>' +
+          '<div class="byline"><img src="' + p.authorAvatar + '" alt="' + p.author + '"><span class="who">' + p.author + '</span><span class="sep"></span><span>' + p.readTime + ' dk</span></div></div>' +
+          '<div class="card-foot"><a class="shop-link" href="' + p.shopUrl + '" data-shop="' + p.title + '">Önerilen ürünü incele <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>' +
+          '</article>';
       }).join("");
     })();
   </script>

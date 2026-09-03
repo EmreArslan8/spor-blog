@@ -51,40 +51,88 @@
     toTop.classList.toggle("show", window.scrollY > 500);
   };
 
-  /* ---- 3. Blog kartı şablonu ---- */
+  /* ---- 3. Editoryal blog kartı şablonu ---- */
   function cardHTML(p) {
-    const discount = p.oldPrice
-      ? Math.round((1 - Number(p.price) / Number(p.oldPrice)) * 100)
-      : 0;
     return `
       <article class="card reveal" data-cat="${p.category}">
         <a class="card-media" href="post.html?id=${p.id}" aria-label="${p.title}">
           <img src="${p.image}" alt="${p.title}" loading="lazy">
-          <span class="card-cat">${p.categoryLabel}</span>
-          ${discount ? `<span class="discount-badge">%${discount} indirim</span>` : ""}
         </a>
         <div class="card-body">
-          <div class="card-meta">
-            <span>${p.date}</span><span class="sep"></span>
-            <span>${p.readTime} dk okuma</span>
-          </div>
+          <span class="kicker">${p.categoryLabel}</span>
           <h3><a href="post.html?id=${p.id}">${p.title}</a></h3>
           <p class="excerpt">${p.excerpt}</p>
-          <div class="card-author">
+          <div class="byline">
             <img src="${p.authorAvatar}" alt="${p.author}" loading="lazy">
-            <span class="an">${p.author}</span>
-          </div>
-          <div class="card-foot">
-            <div class="price">
-              <span class="now">${p.price}</span>
-              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₺</span>` : ""}
-            </div>
-            <a class="shop-btn" href="${p.shopUrl}" data-shop="${p.title}">
-              ${ICON.cart} Ürüne Git
-            </a>
+            <span class="who">${p.author}</span><span class="sep"></span>
+            <span>${p.date}</span><span class="sep"></span>
+            <span>${p.readTime} dk</span>
           </div>
         </div>
+        <div class="card-foot">
+          <a class="shop-link" href="${p.shopUrl}" data-shop="${p.title}">
+            Önerilen ürünü incele ${ICON.arrow}
+          </a>
+        </div>
       </article>`;
+  }
+
+  /* ---- Manşet (lead) + ikincil + popüler ---- */
+  function renderMasthead() {
+    const leadEl = document.getElementById("lead");
+    const sideEl = document.getElementById("leadSide");
+    const popEl = document.getElementById("popularList");
+    if (!leadEl) return;
+
+    const lead = POSTS.find((p) => p.featured) || POSTS[0];
+    const secondary = POSTS.filter((p) => p.id !== lead.id).slice(0, 2);
+    const popular = POSTS.filter((p) => p.id !== lead.id).slice(2, 6);
+
+    leadEl.innerHTML = `
+      <img src="${lead.image}" alt="${lead.title}">
+      <div class="lead-body">
+        <span class="kicker">${lead.categoryLabel}</span>
+        <h2><a href="post.html?id=${lead.id}">${lead.title}</a></h2>
+        <p>${lead.excerpt}</p>
+        <div class="byline">
+          <img src="${lead.authorAvatar}" alt="${lead.author}">
+          <span class="who">${lead.author}</span><span class="sep"></span>
+          <span>${lead.date}</span><span class="sep"></span>
+          <span>${lead.readTime} dk okuma</span>
+        </div>
+        <a class="shop-link" href="${lead.shopUrl}" data-shop="${lead.title}">Yazıdaki ürünü incele ${ICON.arrow}</a>
+      </div>`;
+
+    if (sideEl) {
+      sideEl.innerHTML = secondary
+        .map(
+          (p) => `
+        <a class="mini" href="post.html?id=${p.id}">
+          <div class="mini-media"><img src="${p.image}" alt="${p.title}" loading="lazy"></div>
+          <div>
+            <span class="kicker">${p.categoryLabel}</span>
+            <h3>${p.title}</h3>
+            <div class="m-meta">${p.date} · ${p.readTime} dk</div>
+          </div>
+        </a>`
+        )
+        .join("");
+    }
+
+    if (popEl) {
+      popEl.innerHTML = popular
+        .map(
+          (p, i) => `
+        <li>
+          <span class="num">${String(i + 1).padStart(2, "0")}</span>
+          <div>
+            <a href="post.html?id=${p.id}">${p.title}</a>
+            <div class="p-meta">${p.categoryLabel} · ${p.readTime} dk</div>
+          </div>
+        </li>`
+        )
+        .join("");
+    }
   }
 
   /* ---- 4. Kategori çipleri ---- */
@@ -257,6 +305,7 @@
   /* ---- Başlat ---- */
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+  renderMasthead();
   render();
   observeReveals();
   // Yıl bilgisi
