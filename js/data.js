@@ -424,4 +424,56 @@ const POST_CONTENT = {
   },
 };
 
-window.SITE_DATA = { CATEGORIES, POSTS, STATS, FAQ, AUTHORS, POST_CONTENT };
+/* Yazı içi mini SSS — her yazıya özel 2 soru */
+const POST_FAQ = {
+  1: [
+    { q: "Whey proteini suyla mı sütle mi almalıyım?", a: "İkisi de olur. Sütle daha kremamsı ve kalorili olur; kilo/kalori hedefine göre seç. Laktoz hassasiyetin varsa suyla ve izolat formuyla ilerle." },
+    { q: "Antrenman yapmadığım günlerde de içmeli miyim?", a: "Evet. Amaç günlük protein hedefini tutturmak; bunu besinlerden karşılayamadığın her gün whey ile tamamlayabilirsin." },
+  ],
+  2: [
+    { q: "Kreatini döngüsel mi kullanmalıyım?", a: "Hayır, ara vermeye gerek yok. Her gün düzenli 3–5 g kullanım, depoları dolu tutmanın en basit yoludur." },
+    { q: "Kreatin saç dökülmesi yapar mı?", a: "Bu iddia tek bir küçük çalışmaya dayanır ve doğrudan kanıtlanmamıştır. Genel popülasyonda net bir bağ gösterilmemiştir." },
+  ],
+  3: [
+    { q: "Sadece güneşlenerek yeterli D vitamini alabilir miyim?", a: "Yaz aylarında mümkün olabilir ama enlem, cilt tonu ve güneş kremi bunu sınırlar. Kış aylarında çoğu kişide takviye gerekir." },
+    { q: "D vitaminini neyle birlikte almalıyım?", a: "Yağda çözünür olduğu için yağ içeren bir öğünle emilimi artar. K2 ve magnezyum ile birlikte de sık önerilir." },
+  ],
+  4: [
+    { q: "Yağ yakıcılar kas kaybettirir mi?", a: "Doğrudan değil; ancak aşırı kalori açığı ve düşük protein kas kaybına yol açar. Takviye değil, plan belirleyicidir." },
+    { q: "Kafeinsiz yağ yakıcı işe yarar mı?", a: "Etkisi genelde daha da sınırlıdır. Kafein çıkınca geriye çoğunlukla mütevazı etkili bileşenler kalır." },
+  ],
+  5: [
+    { q: "BCAA'yı antrenman sırasında içmek mantıklı mı?", a: "Yeterli protein alıyorsan ekstra fayda sınırlıdır. Aç antrenman yapıyorsan EAA daha bütünlüklü bir seçenektir." },
+    { q: "EAA kilo aldırır mı?", a: "Kalori içeriği çok düşüktür; tek başına kilo aldırmaz. Etkisi kas protein sentezini desteklemek üzerinedir." },
+  ],
+  6: [
+    { q: "Günde ne kadar EPA+DHA almalıyım?", a: "Genel sağlık için sıklıkla 1–2 g EPA+DHA aralığı önerilir. Etiketteki toplam yağ değil, bu iki değeri topla." },
+    { q: "Balık yağı yerine balık yesem yeterli olur mu?", a: "Haftada 2–3 porsiyon yağlı balık iyi bir kaynaktır. Bunu tutturamıyorsan takviye pratik bir alternatiftir." },
+  ],
+  7: [
+    { q: "Pre-workout bağımlılık yapar mı?", a: "Fizyolojik bağımlılık yapmaz ama kafeine tolerans gelişir. Ara ara mola vermek toleransı sıfırlamaya yardımcı olur." },
+    { q: "Boş mideye almak sorun olur mu?", a: "Bazılarında mide rahatsızlığı yapabilir. Hafif bir atıştırmalıkla almak genelde daha konforludur." },
+  ],
+  8: [
+    { q: "Magnezyum her gün alınabilir mi?", a: "Evet, önerilen dozlarda günlük kullanım güvenlidir. Yüksek dozlar bağırsakları gevşetebilir." },
+    { q: "Hangi form uyku için en iyisi?", a: "Magnezyum glisinat, mideyi az yorması ve sakinleştirici etkisiyle akşam kullanımında sık tercih edilir." },
+  ],
+  9: [
+    { q: "Gainer yerine normal yemek yesem olmaz mı?", a: "Olur ve çoğu zaman daha iyidir. Gainer yalnızca yeterince yiyemeyenler için pratik bir kalori kaynağıdır." },
+    { q: "Gainer yağlandırır mı?", a: "Toplam kalori fazlası yağlandırır. Gainer'ı kontrollü kullanır ve antrenmanla desteklersen kas lehine çalışır." },
+  ],
+  10: [
+    { q: "Glutamin kas yapar mı?", a: "Yeterli protein alan sağlıklı sporcularda kas gelişimine katkısı küçüktür. Asıl faydası yoğun stres dönemlerinde olabilir." },
+    { q: "Whey zaten glutamin içeriyor mu?", a: "Evet, whey doğal olarak glutamin içerir. Dengeli beslenen çoğu kişi ekstra glutamine ihtiyaç duymaz." },
+  ],
+  11: [
+    { q: "Çinkoyu aç mı tok mu almalıyım?", a: "Mideyi rahatsız edebildiği için genelde bir öğünle almak önerilir. Yüksek doz demir/kalsiyum ile emilimi çakışabilir." },
+    { q: "Ne kadar çinko güvenli?", a: "Uzun süreli yüksek dozlardan (40 mg üstü) kaçın; bakır dengesini bozabilir. Kısa süreli destek için ölçülü kullan." },
+  ],
+  12: [
+    { q: "L-karnitin gerçekten yağ yakar mı?", a: "Tek başına dramatik bir etki beklenmemeli. Düzenli egzersiz ve kalori açığıyla birlikte küçük bir destek sağlayabilir." },
+    { q: "Ne zaman almalıyım?", a: "Sık öneri, antrenman öncesi veya karbonhidratlı bir öğünle almaktır; bu emilimi destekleyebilir." },
+  ],
+};
+
+window.SITE_DATA = { CATEGORIES, POSTS, STATS, FAQ, AUTHORS, POST_CONTENT, POST_FAQ };

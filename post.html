@@ -62,6 +62,23 @@
     .share a { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--card); border: 1px solid var(--border); color: var(--text-soft); transition: all .2s; }
     .share a:hover { border-color: var(--brand); color: var(--brand); transform: translateY(-2px); }
     .share svg { width: 17px; height: 17px; }
+    /* İçindekiler */
+    .toc { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--card); padding: 20px 22px; margin: 0 0 30px; }
+    .toc h3 { display: flex; align-items: center; gap: 9px; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-mute); margin-bottom: 12px; font-family: var(--font-body); font-weight: 700; }
+    .toc h3 svg { width: 16px; height: 16px; }
+    .toc ol { counter-reset: toc; display: grid; gap: 8px; }
+    .toc li { counter-increment: toc; }
+    .toc a { display: flex; gap: 10px; color: var(--text-soft); font-weight: 300; transition: color .2s; }
+    .toc a::before { content: counter(toc, decimal-leading-zero); color: var(--brand); font-family: var(--font-head); font-weight: 600; font-size: .85rem; }
+    .toc a:hover { color: var(--brand); }
+    /* İpucu kutusu */
+    .callout { display: flex; gap: 14px; padding: 16px 18px; margin: 22px 0; border-radius: var(--radius); background: var(--brand-soft); border: 1px solid color-mix(in srgb, var(--brand) 30%, var(--border)); }
+    .callout svg { width: 22px; height: 22px; color: var(--brand); flex: 0 0 auto; margin-top: 2px; }
+    .callout p { margin: 0; color: var(--text); font-weight: 300; }
+    .callout b { font-weight: 600; }
+    /* Yazı içi SSS başlığı */
+    .post-faq-title { font-family: var(--font-head); font-weight: 500; font-size: 1.5rem; margin: 38px 0 16px; }
+    .prose h2 { scroll-margin-top: 90px; }
   </style>
 </head>
 <body>
@@ -110,7 +127,7 @@
         <div class="section-head">
           <div class="st"><span class="kicker">Devam et</span><h2>İlgini çekebilir</h2></div>
         </div>
-        <div class="posts-grid" id="posts"></div>
+        <div class="posts-grid" id="related"></div>
       </div>
     </section>
   </main>
@@ -149,7 +166,8 @@
             rich.takeaways.map(function (t) { return '<li>' + checkSvg + t + '</li>'; }).join("") + '</ul></div>'
         : "";
 
-      var body = '<p class="lede">' + intro + '</p>' + takeaways +
+      var callout = '<div class="callout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1h6c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg><p><b>İpucu:</b> Yeni bir takviyeye başlarken tek seferde tek ürün dene; böylece etkisini ve olası yan etkilerini net biçimde gözlemleyebilirsin.</p></div>';
+      var body = '<p class="lede">' + intro + '</p>' + takeaways + callout +
         (rich.body ? rich.body.join("") :
           "<p>Bu yazıda " + post.title.toLowerCase() + " konusunu güncel bilimsel bulgular ışığında ele alıyoruz.</p>");
 
@@ -178,6 +196,38 @@
         "</div>" +
         (authorBio ? '<div class="author-box"><img src="' + post.authorAvatar + '" alt="' + post.author + '"><div><div class="ab-role">Yazar</div><div class="ab-name">' + post.author + '</div><div class="ab-bio">' + authorBio + "</div></div></div>" : "");
 
+      // İçindekiler (TOC) — bölüm başlıklarından otomatik üret
+      var prose = document.querySelector(".prose");
+      var heads = prose ? prose.querySelectorAll("h2") : [];
+      if (heads.length > 1) {
+        var toc = '<div class="toc"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg> İçindekiler</h3><ol>';
+        heads.forEach(function (h, i) {
+          var slug = "bolum-" + (i + 1);
+          h.id = slug;
+          toc += '<li><a href="#' + slug + '">' + h.textContent + "</a></li>";
+        });
+        toc += "</ol></div>";
+        var firstH2 = heads[0];
+        firstH2.insertAdjacentHTML("beforebegin", toc);
+      }
+
+      // Yazı içi mini SSS
+      var pFaq = (window.SITE_DATA.POST_FAQ || {})[post.id];
+      if (pFaq && pFaq.length) {
+        var plus = '<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>';
+        var faqHTML = '<h2 class="post-faq-title">Bu konuda sık sorulanlar</h2><div class="faq" id="postFaq">' +
+          pFaq.map(function (f) { return '<div class="faq-item"><button class="faq-q">' + f.q + plus + '</button><div class="faq-a"><p>' + f.a + "</p></div></div>"; }).join("") + "</div>";
+        document.getElementById("article").insertAdjacentHTML("beforeend", faqHTML);
+        var pf = document.getElementById("postFaq");
+        pf.addEventListener("click", function (e) {
+          var q = e.target.closest(".faq-q");
+          if (!q) return;
+          var item = q.parentElement, ans = item.querySelector(".faq-a"), open = item.classList.contains("open");
+          pf.querySelectorAll(".faq-item.open").forEach(function (el) { el.classList.remove("open"); el.querySelector(".faq-a").style.maxHeight = null; });
+          if (!open) { item.classList.add("open"); ans.style.maxHeight = ans.scrollHeight + "px"; }
+        });
+      }
+
       // Okuma ilerleme çubuğu
       var bar = document.getElementById("progress");
       var art = document.getElementById("article");
@@ -193,7 +243,7 @@
       var related = P.filter(function (p) { return p.category === post.category && p.id !== post.id; }).slice(0, 3);
       if (related.length < 3) related = related.concat(P.filter(function (p) { return p.id !== post.id && related.indexOf(p) === -1; })).slice(0, 3);
 
-      document.getElementById("posts").innerHTML = related.map(function (p) {
+      document.getElementById("related").innerHTML = related.map(function (p) {
         return '<article class="card reveal in" style="--hue:' + hueOf(p.category) + '">' +
           '<a class="card-media" href="post.html?id=' + p.id + '"><span class="card-cat">' + p.categoryLabel + '</span><img src="' + p.image + '" alt="' + p.title + '" loading="lazy"></a>' +
           '<div class="card-body"><h3><a href="post.html?id=' + p.id + '">' + p.title + '</a></h3>' +
