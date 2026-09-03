@@ -1,31 +1,35 @@
 /* ============================================================
-   Formda — etkileşim katmanı
-   Arama, kategori filtreleme, dark mode, mobil menü,
-   scroll animasyonları, "yukarı çık", bülten formu.
+   Formda — etkileşim katmanı (koyu tema)
+   Kart grid, kategori filtre, arama, mega-menü, SSS akordiyonu,
+   tema, mobil menü, scroll animasyon, yukarı çık.
    ============================================================ */
 (function () {
   "use strict";
 
-  const { CATEGORIES, POSTS } = window.SITE_DATA;
+  const D = window.SITE_DATA;
+  const { CATEGORIES, POSTS, STATS, FAQ } = D;
+  const hueOf = (catId) => (CATEGORIES.find((c) => c.id === catId) || {}).hue || 210;
 
-  /* ---- Küçük SVG ikon kütüphanesi (satır içi) ---- */
+  /* ---- SVG ikonlar ---- */
   const ICON = {
     cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
-    up: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>',
-    search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
-    clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>',
+    plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
     empty: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>',
+    grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+    bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>',
+    leaf: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-6 6-9 16-9 0 8-4 12-9 12z"/><path d="M4 20c2-4 5-6 9-7"/></svg>',
+    flame: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-2 1-3 1-3 0 2 1 3 2 3 0-3 2-5 2-9z"/></svg>',
+    activity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+    shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5z"/></svg>',
   };
 
-  /* ---- 1. Tema (dark mode) ---- */
+  /* ---- 1. Tema ---- */
   const root = document.documentElement;
   const stored = localStorage.getItem("formda-theme");
   if (stored) root.setAttribute("data-theme", stored);
-  else if (window.matchMedia("(prefers-color-scheme: dark)").matches) root.setAttribute("data-theme", "dark");
-
   function syncThemeIcon() {
-    const dark = root.getAttribute("data-theme") === "dark";
+    const dark = root.getAttribute("data-theme") !== "light";
     document.querySelectorAll("[data-theme-toggle]").forEach((b) => {
       b.innerHTML = dark
         ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></svg>'
@@ -34,111 +38,73 @@
     });
   }
   document.addEventListener("click", (e) => {
-    const t = e.target.closest("[data-theme-toggle]");
-    if (!t) return;
-    const dark = root.getAttribute("data-theme") === "dark";
-    const next = dark ? "light" : "dark";
+    if (!e.target.closest("[data-theme-toggle]")) return;
+    const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
     root.setAttribute("data-theme", next);
     localStorage.setItem("formda-theme", next);
     syncThemeIcon();
   });
   syncThemeIcon();
 
-  /* ---- 2. Header scroll durumu ---- */
+  /* ---- 2. Header scroll ---- */
   const header = document.querySelector(".site-header");
+  const toTop = document.getElementById("toTop");
   const onScroll = () => {
     header.classList.toggle("scrolled", window.scrollY > 8);
-    toTop.classList.toggle("show", window.scrollY > 500);
+    if (toTop) toTop.classList.toggle("show", window.scrollY > 600);
   };
 
-  /* ---- 3. Editoryal blog kartı şablonu ---- */
+  /* ---- 3. Kart şablonu (parıltılı) ---- */
   function cardHTML(p) {
     return `
-      <article class="card reveal" data-cat="${p.category}">
+      <article class="card reveal" data-cat="${p.category}" style="--hue:${hueOf(p.category)}">
         <a class="card-media" href="post.html?id=${p.id}" aria-label="${p.title}">
+          <span class="card-cat">${p.categoryLabel}</span>
           <img src="${p.image}" alt="${p.title}" loading="lazy">
         </a>
         <div class="card-body">
-          <span class="kicker">${p.categoryLabel}</span>
           <h3><a href="post.html?id=${p.id}">${p.title}</a></h3>
           <p class="excerpt">${p.excerpt}</p>
           <div class="byline">
             <img src="${p.authorAvatar}" alt="${p.author}" loading="lazy">
             <span class="who">${p.author}</span><span class="sep"></span>
-            <span>${p.date}</span><span class="sep"></span>
-            <span>${p.readTime} dk</span>
+            <span>${p.date}</span>
           </div>
-        </div>
-        <div class="card-foot">
-          <a class="shop-link" href="${p.shopUrl}" data-shop="${p.title}">
-            Önerilen ürünü incele ${ICON.arrow}
-          </a>
+          <div class="card-foot">
+            <span class="rt">${p.readTime} dk okuma</span>
+            <a class="shop-btn" href="${p.shopUrl}" data-shop="${p.title}">${ICON.cart} Ürüne Git</a>
+          </div>
         </div>
       </article>`;
   }
 
-  /* ---- Manşet (lead) + ikincil + popüler ---- */
-  function renderMasthead() {
-    const leadEl = document.getElementById("lead");
-    const sideEl = document.getElementById("leadSide");
-    const popEl = document.getElementById("popularList");
-    if (!leadEl) return;
-
-    const lead = POSTS.find((p) => p.featured) || POSTS[0];
-    const secondary = POSTS.filter((p) => p.id !== lead.id).slice(0, 2);
-    const popular = POSTS.filter((p) => p.id !== lead.id).slice(2, 6);
-
-    leadEl.innerHTML = `
-      <div class="lead-body">
-        <span class="feat">★ Öne çıkan yazı</span>
-        <h2><a href="post.html?id=${lead.id}">${lead.title}</a></h2>
-        <p>${lead.excerpt}</p>
-        <div class="byline">
-          <img src="${lead.authorAvatar}" alt="${lead.author}">
-          <span class="who">${lead.author}</span><span class="sep"></span>
-          <span>${lead.date}</span><span class="sep"></span>
-          <span>${lead.readTime} dk okuma</span>
-        </div>
-        <a class="shop-link" href="${lead.shopUrl}" data-shop="${lead.title}">Yazıdaki ürünü incele ${ICON.arrow}</a>
-      </div>
-      <div class="lead-media">
-        <span class="tag">${lead.categoryLabel}</span>
-        <img src="${lead.image}" alt="${lead.title}">
-      </div>`;
-
-    if (sideEl) {
-      sideEl.innerHTML = secondary
-        .map(
-          (p) => `
-        <a class="mini" href="post.html?id=${p.id}">
-          <div class="mini-media"><img src="${p.image}" alt="${p.title}" loading="lazy"></div>
-          <div>
-            <span class="kicker">${p.categoryLabel}</span>
-            <h3>${p.title}</h3>
-            <div class="m-meta">${p.date} · ${p.readTime} dk</div>
-          </div>
-        </a>`
-        )
-        .join("");
-    }
-
-    if (popEl) {
-      popEl.innerHTML = popular
-        .map(
-          (p, i) => `
-        <li>
-          <span class="num">${String(i + 1).padStart(2, "0")}</span>
-          <div>
-            <a href="post.html?id=${p.id}">${p.title}</a>
-            <div class="p-meta">${p.categoryLabel} · ${p.readTime} dk</div>
-          </div>
-        </li>`
-        )
-        .join("");
-    }
+  /* ---- 4. Mega-menü ---- */
+  const megaGrid = document.getElementById("megaGrid");
+  if (megaGrid) {
+    megaGrid.innerHTML = CATEGORIES.filter((c) => c.id !== "hepsi")
+      .map(
+        (c) => `
+      <a class="mega-item" href="#blog" data-cat="${c.id}">
+        <span class="mega-ic" style="background:linear-gradient(135deg,hsl(${c.hue},80%,55%),hsl(${c.hue + 25},80%,45%))">${ICON[c.icon] || ICON.grid}</span>
+        <span><span class="mt">${c.label}</span><br><span class="md">${c.desc}</span></span>
+      </a>`
+      )
+      .join("");
+    // Mega item tıklayınca ilgili kategoriyi seç
+    megaGrid.addEventListener("click", (e) => {
+      const it = e.target.closest("[data-cat]");
+      if (!it) return;
+      selectCategory(it.dataset.cat);
+    });
   }
 
-  /* ---- 4. Kategori çipleri ---- */
+  /* ---- 5. Güven şeridi ---- */
+  const trustEl = document.getElementById("trust");
+  if (trustEl && STATS) {
+    trustEl.innerHTML = STATS.map((s) => `<div class="t"><div class="v">${s.value}</div><div class="l">${s.label}</div></div>`).join("");
+  }
+
+  /* ---- 6. Kategori çipleri ---- */
   const chipsWrap = document.getElementById("chips");
   if (chipsWrap) {
     chipsWrap.innerHTML = CATEGORIES.map(
@@ -146,7 +112,7 @@
     ).join("");
   }
 
-  /* ---- 5. Durum + render ---- */
+  /* ---- 7. Durum + render ---- */
   const grid = document.getElementById("posts");
   const PAGE = 6;
   let state = { cat: "hepsi", q: "", shown: PAGE };
@@ -155,43 +121,38 @@
     return POSTS.filter((p) => {
       const okCat = state.cat === "hepsi" || p.category === state.cat;
       const q = state.q.trim().toLowerCase();
-      const okQ =
-        !q ||
-        p.title.toLowerCase().includes(q) ||
-        p.excerpt.toLowerCase().includes(q) ||
-        p.tags.some((t) => t.toLowerCase().includes(q));
+      const okQ = !q || p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q) || p.tags.some((t) => t.toLowerCase().includes(q));
       return okCat && okQ;
     });
   }
-
   function render() {
     if (!grid) return;
     const list = filtered();
     const visible = list.slice(0, state.shown);
-    if (!list.length) {
-      grid.innerHTML = `<div class="empty">${ICON.empty}<p>Aramanızla eşleşen içerik bulunamadı.</p></div>`;
-    } else {
-      grid.innerHTML = visible.map(cardHTML).join("");
-    }
-    // "Daha fazla" butonu
+    grid.innerHTML = list.length
+      ? visible.map(cardHTML).join("")
+      : `<div class="empty">${ICON.empty}<p>Aramanızla eşleşen içerik bulunamadı.</p></div>`;
     const lm = document.getElementById("loadMoreWrap");
     if (lm) lm.style.display = list.length > state.shown ? "flex" : "none";
     observeReveals();
   }
 
-  // Kategori seçimi
+  function selectCategory(catId) {
+    state.cat = catId;
+    state.shown = PAGE;
+    if (chipsWrap) {
+      chipsWrap.querySelectorAll(".chip").forEach((c) => c.classList.toggle("active", c.dataset.cat === catId));
+    }
+    render();
+    document.getElementById("blog").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   chipsWrap &&
     chipsWrap.addEventListener("click", (e) => {
       const chip = e.target.closest(".chip");
-      if (!chip) return;
-      chipsWrap.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
-      chip.classList.add("active");
-      state.cat = chip.dataset.cat;
-      state.shown = PAGE;
-      render();
+      if (chip) selectCategory(chip.dataset.cat);
     });
 
-  // Arama (debounce)
   const searchInput = document.getElementById("search");
   let deb;
   searchInput &&
@@ -204,7 +165,6 @@
       }, 180);
     });
 
-  // Daha fazla yükle
   const loadMoreBtn = document.getElementById("loadMore");
   loadMoreBtn &&
     loadMoreBtn.addEventListener("click", () => {
@@ -212,17 +172,45 @@
       render();
     });
 
-  // E-ticaret yönlendirme (demo bildirimi)
+  /* ---- 8. SSS akordiyonu ---- */
+  const faqEl = document.getElementById("faq");
+  if (faqEl && FAQ) {
+    faqEl.innerHTML = FAQ.map(
+      (f) => `
+      <div class="faq-item">
+        <button class="faq-q">${f.q}<span class="ic">${ICON.plus}</span></button>
+        <div class="faq-a"><p>${f.a}</p></div>
+      </div>`
+    ).join("");
+    faqEl.addEventListener("click", (e) => {
+      const q = e.target.closest(".faq-q");
+      if (!q) return;
+      const item = q.parentElement;
+      const ans = item.querySelector(".faq-a");
+      const isOpen = item.classList.contains("open");
+      // tek açık: diğerlerini kapat
+      faqEl.querySelectorAll(".faq-item.open").forEach((el) => {
+        el.classList.remove("open");
+        el.querySelector(".faq-a").style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        ans.style.maxHeight = ans.scrollHeight + "px";
+      }
+    });
+  }
+
+  /* ---- 9. E-ticaret yönlendirme (demo) ---- */
   document.addEventListener("click", (e) => {
     const s = e.target.closest("[data-shop]");
     if (!s) return;
-    if (s.getAttribute("href").startsWith("#")) {
+    if ((s.getAttribute("href") || "").startsWith("#")) {
       e.preventDefault();
-      toast(`"${s.dataset.shop}" ürün sayfasına yönlendiriliyorsunuz…`);
+      toast(`"${s.dataset.shop}" mağaza sayfasına yönlendiriliyorsunuz…`);
     }
   });
 
-  /* ---- 6. Scroll reveal ---- */
+  /* ---- 10. Scroll reveal ---- */
   let io;
   function observeReveals() {
     if (!("IntersectionObserver" in window)) {
@@ -244,12 +232,10 @@
     document.querySelectorAll(".reveal:not(.in)").forEach((el) => io.observe(el));
   }
 
-  /* ---- 7. Back to top ---- */
-  const toTop = document.getElementById("toTop");
-  toTop &&
-    toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  /* ---- 11. Back to top ---- */
+  toTop && toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-  /* ---- 8. Mobil menü ---- */
+  /* ---- 12. Mobil menü ---- */
   const menuToggle = document.getElementById("menuToggle");
   const mobileNav = document.getElementById("mobileNav");
   menuToggle &&
@@ -266,29 +252,29 @@
       }
     });
 
-  /* ---- 9. Bülten formu ---- */
+  /* ---- 13. Bülten ---- */
   const nlForm = document.getElementById("nlForm");
   nlForm &&
     nlForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const email = nlForm.querySelector("input").value.trim();
       const note = document.getElementById("nlNote");
-      if (email) {
+      if (email && note) {
         note.textContent = "🎉 Teşekkürler! Aboneliğiniz onaylandı.";
         note.classList.add("nl-success");
         nlForm.reset();
       }
     });
 
-  /* ---- 10. Basit toast ---- */
+  /* ---- 14. Toast ---- */
   let toastEl;
   function toast(msg) {
     if (!toastEl) {
       toastEl = document.createElement("div");
       Object.assign(toastEl.style, {
         position: "fixed", left: "50%", bottom: "28px", transform: "translateX(-50%) translateY(20px)",
-        background: "var(--text)", color: "var(--bg)", padding: "13px 22px", borderRadius: "999px",
-        fontWeight: "600", fontSize: ".92rem", boxShadow: "var(--shadow-lg)", zIndex: "200",
+        background: "var(--brand)", color: "#fff", padding: "13px 22px", borderRadius: "999px",
+        fontWeight: "600", fontSize: ".92rem", boxShadow: "0 12px 30px rgba(61,139,255,.45)", zIndex: "200",
         opacity: "0", transition: "opacity .3s, transform .3s", maxWidth: "90vw", textAlign: "center",
       });
       document.body.appendChild(toastEl);
@@ -308,10 +294,8 @@
   /* ---- Başlat ---- */
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
-  renderMasthead();
   render();
   observeReveals();
-  // Yıl bilgisi
   const y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
 })();

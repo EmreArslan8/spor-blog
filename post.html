@@ -1,52 +1,48 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="light">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yazı — Formda</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <style>
-    /* Sadece detay sayfasına özel yerleşim */
-    .article { max-width: 760px; margin-inline: auto; padding: clamp(24px,4vw,48px) 0; }
-    .breadcrumb { display: flex; gap: 8px; align-items: center; color: var(--text-mute); font-size: .85rem; margin-bottom: 22px; flex-wrap: wrap; }
-    .breadcrumb a { color: var(--brand-strong); font-weight: 600; }
-    .article h1 { font-size: clamp(1.8rem, 4.4vw, 2.8rem); margin: 10px 0 18px; }
-    .article-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; color: var(--text-mute); font-size: .9rem; margin-bottom: 26px; }
-    .article-meta .card-author img { width: 40px; height: 40px; }
-    .article-hero { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); margin-bottom: 32px; aspect-ratio: 16/9; }
+    .article { max-width: 760px; margin-inline: auto; padding: clamp(24px,4vw,44px) 0; }
+    .breadcrumb { display: flex; gap: 8px; align-items: center; color: var(--text-mute); font-size: .85rem; margin-bottom: 20px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--brand); font-weight: 600; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--brand); font-weight: 600; margin-bottom: 12px; }
+    .back-link svg { width: 18px; height: 18px; }
+    .article h1 { font-size: clamp(1.9rem, 4.6vw, 2.9rem); margin: 8px 0 18px; }
+    .article-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--text-mute); font-size: .9rem; margin-bottom: 26px; }
+    .article-meta .who { color: var(--text-soft); font-weight: 600; }
+    .article-meta img.av { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+    .article-meta .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--text-mute); }
+    .article-hero { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--glow); margin-bottom: 32px; aspect-ratio: 16/9; border: 1px solid var(--border); }
     .article-hero img { width: 100%; height: 100%; object-fit: cover; }
     .prose { font-size: 1.06rem; color: var(--text-soft); }
     .prose h2 { font-size: 1.5rem; color: var(--text); margin: 34px 0 12px; }
     .prose p { margin-bottom: 18px; }
-    .prose ul.dots { list-style: none; display: grid; gap: 10px; margin: 0 0 20px; }
+    .prose strong { color: var(--text); }
+    .prose ul.dots { display: grid; gap: 10px; margin: 0 0 20px; }
     .prose ul.dots li { position: relative; padding-left: 28px; }
-    .prose ul.dots li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
-    blockquote { margin: 26px 0; padding: 18px 24px; border-left: 4px solid var(--brand); background: var(--brand-soft); border-radius: 12px; color: var(--text); font-weight: 500; }
-    /* Ürün / e-ticaret yönlendirme kutusu */
-    .product-cta { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; padding: 22px; margin: 36px 0; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-sm); }
-    .product-cta img { width: 96px; height: 96px; border-radius: var(--radius); object-fit: cover; }
+    .prose ul.dots li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 10px var(--brand); }
+    blockquote { margin: 26px 0; padding: 18px 24px; border-left: 3px solid var(--brand); background: var(--brand-soft); border-radius: 12px; color: var(--text); font-weight: 500; }
+    .product-cta { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; padding: 22px; margin: 36px 0; border: 1px solid var(--border); border-radius: var(--radius-lg); background: radial-gradient(70% 120% at 100% 0%, var(--brand-soft), transparent 60%), var(--card); box-shadow: var(--shadow-md); }
+    .product-cta img.pimg { width: 92px; height: 92px; border-radius: var(--radius); object-fit: cover; border: 1px solid var(--border); }
     .product-cta .pc-info { flex: 1 1 220px; }
-    .product-cta .pc-info .k { font-size: .8rem; color: var(--brand-strong); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
-    .product-cta .pc-info h4 { font-size: 1.2rem; margin: 4px 0 6px; }
-    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 28px 0; }
-    .tags a { padding: 6px 14px; border-radius: var(--radius-pill); background: var(--surface-2); font-size: .85rem; color: var(--text-soft); }
-    .related { margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--brand-strong); font-weight: 600; margin-bottom: 8px; }
-    .back-link svg { width: 18px; height: 18px; }
-    /* Yazar & fiyat (ürün kutusuna özel) */
-    .article-meta .card-author { display: flex; align-items: center; gap: 10px; }
-    .article-meta .card-author img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-    .article-meta .card-author .an { color: var(--text); font-weight: 600; }
+    .product-cta .pc-info .k { font-size: .74rem; color: var(--brand); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+    .product-cta .pc-info h4 { font-size: 1.2rem; margin: 4px 0 8px; }
     .price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
     .price .now { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--text); }
     .price .now::after { content: " ₺"; font-size: .8em; color: var(--text-soft); }
     .price .old { font-size: .9rem; color: var(--text-mute); text-decoration: line-through; }
-    .discount-badge { padding: 4px 10px; border-radius: var(--radius-pill); background: var(--accent-soft); color: var(--accent); font-size: .78rem; font-weight: 700; }
-    .product-cta .shop-link { flex: 0 0 auto; }
+    .discount-badge { padding: 4px 10px; border-radius: var(--radius-pill); background: var(--brand-soft); color: var(--brand); font-size: .76rem; font-weight: 700; }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 28px 0; }
+    .tags a { padding: 6px 14px; border-radius: var(--radius-pill); background: var(--card); border: 1px solid var(--border); font-size: .85rem; color: var(--text-soft); }
+    .tags a:hover { border-color: var(--brand); color: var(--brand); }
   </style>
 </head>
 <body>
@@ -54,18 +50,21 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo">
-        <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span>
+        <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span>
         <span>Form<b>da</b></span>
       </a>
       <nav class="nav" aria-label="Ana menü">
         <a href="index.html">Anasayfa</a>
         <a href="index.html#blog">Yazılar</a>
-        <a href="index.html#kategoriler">Kategoriler</a>
-        <a href="index.html#bulten">Bülten</a>
+        <a href="index.html#sss">SSS</a>
+        <a href="index.html#bulten">İletişim</a>
       </nav>
       <div class="header-actions">
         <button class="icon-btn" data-theme-toggle aria-label="Tema değiştir"></button>
-        <a href="index.html#blog" class="btn btn-primary">Keşfet</a>
+        <a href="index.html#magaza" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+          Mağaza
+        </a>
         <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
         </button>
@@ -76,22 +75,19 @@
   <div class="mobile-nav" id="mobileNav">
     <a href="index.html">Anasayfa</a>
     <a href="index.html#blog">Yazılar</a>
-    <a href="index.html#kategoriler">Kategoriler</a>
-    <a href="index.html#bulten">Bülten</a>
+    <a href="index.html#sss">SSS</a>
+    <a href="index.html#bulten">İletişim</a>
   </div>
 
   <main>
     <div class="container">
-      <article class="article" id="article">
-        <!-- JS ile doldurulur -->
-      </article>
+      <article class="article" id="article"><!-- JS --></article>
     </div>
 
-    <!-- İlgili yazılar -->
-    <section class="section related">
+    <section class="section" style="padding-top:clamp(20px,4vw,40px)">
       <div class="container">
         <div class="section-head">
-          <div class="st"><p class="section-tag">Devam et</p><h2>İlgini çekebilir</h2></div>
+          <div class="st"><span class="kicker">Devam et</span><h2>İlgini çekebilir</h2></div>
         </div>
         <div class="posts-grid" id="posts"></div>
       </div>
@@ -112,13 +108,13 @@
 
   <script src="js/data.js"></script>
   <script>
-    // Detay sayfası içeriğini oluştur (mock gövde metni)
     (function () {
       var params = new URLSearchParams(location.search);
       var id = Number(params.get("id")) || 1;
       var P = window.SITE_DATA.POSTS;
+      var C = window.SITE_DATA.CATEGORIES;
+      var hueOf = function (cid) { var c = C.find(function (x) { return x.id === cid; }); return c ? c.hue : 210; };
       var post = P.find(function (p) { return p.id === id; }) || P[0];
-
       document.title = post.title + " — Formda";
 
       var body = [
@@ -138,30 +134,28 @@
         '<a class="back-link" href="index.html#blog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Tüm yazılar</a>' +
         '<div class="breadcrumb"><a href="index.html">Formda</a> › <span>' + post.categoryLabel + "</span></div>" +
         "<h1>" + post.title + "</h1>" +
-        '<div class="article-meta"><div class="card-author"><img src="' + post.authorAvatar + '" alt="' + post.author + '"><span class="an">' + post.author + "</span></div><span class=\"sep\" style=\"width:3px;height:3px;border-radius:50%;background:var(--text-mute)\"></span><span>" + post.date + "</span><span>· " + post.readTime + " dk okuma</span></div>" +
+        '<div class="article-meta"><img class="av" src="' + post.authorAvatar + '" alt="' + post.author + '"><span class="who">' + post.author + '</span><span class="sep"></span><span>' + post.date + "</span><span class=\"sep\"></span><span>" + post.readTime + " dk okuma</span></div>" +
         '<div class="article-hero"><img src="' + post.image + '" alt="' + post.title + '"></div>' +
         '<div class="prose">' + body +
           '<div class="product-cta">' +
-            '<img src="' + post.image + '" alt="' + post.title + '">' +
+            '<img class="pimg" src="' + post.image + '" alt="' + post.title + '">' +
             '<div class="pc-info"><span class="k">Önerilen ürün</span><h4>' + post.title.split(":")[0] + '</h4>' +
-              '<div class="price"><span class="now">' + post.price + '</span>' + (post.oldPrice ? '<span class="old">' + post.oldPrice + ' ₺</span>' : "") + (discount ? ' <span class="discount-badge" style="position:static">%' + discount + " indirim</span>" : "") + "</div></div>" +
-            '<a class="shop-link boxed" href="' + post.shopUrl + '" data-shop="' + post.title + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg> Mağazada İncele</a>' +
+              '<div class="price"><span class="now">' + post.price + '</span>' + (post.oldPrice ? '<span class="old">' + post.oldPrice + ' ₺</span>' : "") + (discount ? ' <span class="discount-badge">%' + discount + " indirim</span>" : "") + "</div></div>" +
+            '<a class="shop-btn" href="' + post.shopUrl + '" data-shop="' + post.title + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg> Mağazada İncele</a>' +
           "</div>" +
         "</div>" +
         '<div class="tags">' + post.tags.map(function (t) { return '<a href="index.html#blog">#' + t + "</a>"; }).join("") + "</div>";
 
-      // İlgili yazılar (aynı kategori, kendisi hariç, ilk 3)
       var related = P.filter(function (p) { return p.category === post.category && p.id !== post.id; }).slice(0, 3);
       if (related.length < 3) related = related.concat(P.filter(function (p) { return p.id !== post.id && related.indexOf(p) === -1; })).slice(0, 3);
 
       document.getElementById("posts").innerHTML = related.map(function (p) {
-        return '<article class="card reveal in">' +
-          '<a class="card-media" href="post.html?id=' + p.id + '"><img src="' + p.image + '" alt="' + p.title + '" loading="lazy"></a>' +
-          '<div class="card-body"><span class="kicker">' + p.categoryLabel + '</span>' +
-          '<h3><a href="post.html?id=' + p.id + '">' + p.title + '</a></h3>' +
+        return '<article class="card reveal in" style="--hue:' + hueOf(p.category) + '">' +
+          '<a class="card-media" href="post.html?id=' + p.id + '"><span class="card-cat">' + p.categoryLabel + '</span><img src="' + p.image + '" alt="' + p.title + '" loading="lazy"></a>' +
+          '<div class="card-body"><h3><a href="post.html?id=' + p.id + '">' + p.title + '</a></h3>' +
           '<p class="excerpt">' + p.excerpt + '</p>' +
-          '<div class="byline"><img src="' + p.authorAvatar + '" alt="' + p.author + '"><span class="who">' + p.author + '</span><span class="sep"></span><span>' + p.readTime + ' dk</span></div></div>' +
-          '<div class="card-foot"><a class="shop-link" href="' + p.shopUrl + '" data-shop="' + p.title + '">Önerilen ürünü incele <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>' +
+          '<div class="byline"><img src="' + p.authorAvatar + '" alt="' + p.author + '"><span class="who">' + p.author + '</span></div>' +
+          '<div class="card-foot"><span class="rt">' + p.readTime + ' dk</span><a class="shop-btn" href="' + p.shopUrl + '" data-shop="' + p.title + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg> Ürüne Git</a></div></div>' +
           '</article>';
       }).join("");
     })();

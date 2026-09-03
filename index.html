@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="light">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formda — Spor Takviyeleri Blogu</title>
-  <meta name="description" content="Spor takviyeleri hakkında bilimsel, bağımsız ve sade içerikler. Protein, vitamin, performans ve daha fazlası.">
+  <meta name="description" content="Spor takviyeleri hakkında bilimsel, bağımsız ve sade içerikler. Protein, vitamin, performans ve daha fazlası — önerilen ürünlere tek tıkla ulaş.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 </head>
 <body>
 
@@ -17,22 +17,29 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
-        </span>
+        <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span>
         <span>Form<b>da</b></span>
       </a>
 
       <nav class="nav" aria-label="Ana menü">
         <a href="#" class="active">Anasayfa</a>
+        <div class="has-mega">
+          <button aria-haspopup="true">Kategoriler
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="mega"><div class="mega-grid" id="megaGrid"></div></div>
+        </div>
         <a href="#blog">Yazılar</a>
-        <a href="#kategoriler">Kategoriler</a>
-        <a href="#bulten">Bülten</a>
+        <a href="#sss">SSS</a>
+        <a href="#bulten">İletişim</a>
       </nav>
 
       <div class="header-actions">
         <button class="icon-btn" data-theme-toggle aria-label="Tema değiştir"></button>
-        <a href="#blog" class="btn btn-primary">Keşfet</a>
+        <a href="#magaza" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+          Mağaza
+        </a>
         <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
         </button>
@@ -40,45 +47,48 @@
     </div>
   </header>
 
-  <!-- Mobil menü -->
   <div class="mobile-nav" id="mobileNav">
     <a href="#">Anasayfa</a>
     <a href="#blog">Yazılar</a>
-    <a href="#kategoriler">Kategoriler</a>
-    <a href="#bulten">Bülten</a>
-    <a href="#blog" class="btn btn-primary btn-lg">Keşfet</a>
+    <a href="#sss">SSS</a>
+    <a href="#bulten">İletişim</a>
+    <a href="#magaza" class="btn btn-primary btn-lg">Mağazaya Git</a>
   </div>
 
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="container">
-        <div class="hero-head reveal in">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal in">
           <span class="eyebrow"><span class="dot"></span> Bağımsız · Bilimsel · Reklamsız</span>
-          <h1>Takviyeyi <em>anla</em>, kanıta göre seç.</h1>
-          <p>Spor takviyeleri üzerine sade, kanıta dayalı rehberler — ne işe yarar, kime uygun ve doğru ürün hangisi.</p>
-          <div class="hero-actions">
+          <h1>Takviyeyi <span class="hl">anla</span>, doğru ürünü seç.</h1>
+          <p class="lead">Spor takviyeleri üzerine sade ve kanıta dayalı rehberler. Ne işe yaradığını öğren, önerilen ürüne tek tıkla mağazadan ulaş.</p>
+          <div class="hero-cta">
             <a href="#blog" class="btn btn-primary btn-lg">Yazıları oku
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
-            <a href="#kategoriler" class="btn btn-outline btn-lg">Kategorilere bak</a>
+            <a href="#magaza" class="btn btn-ghost btn-lg">Mağazaya göz at</a>
           </div>
+          <div class="trust" id="trust"></div>
         </div>
 
-        <div class="lead-grid">
-          <article class="lead reveal in" id="lead"><!-- JS --></article>
-          <aside class="lead-side reveal in">
-            <div id="leadSide"><!-- ikincil hikâyeler --></div>
-            <div class="popular">
-              <h4>En çok okunanlar</h4>
-              <ol id="popularList"><!-- JS --></ol>
-            </div>
-          </aside>
+        <div class="hero-visual reveal in">
+          <div class="hero-orb">
+            <img src="https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=800&q=80" alt="Spor takviyesi">
+          </div>
+          <div class="hero-chip c1">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span>
+            <span><span class="t">Kanıta dayalı</span><br><span class="v">120+ içerik</span></span>
+          </div>
+          <div class="hero-chip c2">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span><span class="t">Doğrulanmış</span><br><span class="v">Bağımsız test</span></span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ SON YAZILAR ============ -->
+    <!-- ============ BLOG ============ -->
     <section class="section" id="blog">
       <div class="container">
         <div class="section-head reveal" id="kategoriler">
@@ -105,16 +115,47 @@
       </div>
     </section>
 
+    <!-- ============ MAĞAZA CTA ============ -->
+    <section class="section" id="magaza" style="padding-top:0">
+      <div class="container">
+        <div class="shop-cta reveal">
+          <div>
+            <span class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></span>
+            <h2>Yazılardaki ürünleri incelemek ister misin?</h2>
+            <p>Blogda önerilen tüm takviyeleri, bağımsız değerlendirmelerle birlikte mağazamızdan inceleyebilirsin.</p>
+          </div>
+          <a href="#urun-magaza" class="btn btn-primary btn-lg" data-shop="Mağaza">
+            Mağazaya Git
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SSS ============ -->
+    <section class="section" id="sss">
+      <div class="container">
+        <div class="section-head reveal" style="justify-content:center;text-align:center">
+          <div class="st" style="margin-inline:auto">
+            <span class="kicker" style="justify-content:center">Yardım</span>
+            <h2>Sıkça sorulan sorular</h2>
+            <p>Takviyeler ve içeriklerimiz hakkında en çok merak edilenler.</p>
+          </div>
+        </div>
+        <div class="faq reveal" id="faq"></div>
+      </div>
+    </section>
+
     <!-- ============ BÜLTEN ============ -->
-    <section class="section newsletter" id="bulten">
+    <section class="section" id="bulten">
       <div class="container">
         <div class="newsletter-inner reveal">
           <span class="kicker">Bülten</span>
-          <h2>Haftalık Formda bülteni</h2>
-          <p>Yeni incelemeler, indirim fırsatları ve bilimsel ipuçları e-postana gelsin. Spam yok, istediğin an çık.</p>
+          <h2>Yeni yazılardan haberdar ol</h2>
+          <p>Haftalık incelemeler, bilimsel ipuçları ve fırsatlar e-postana gelsin. Spam yok, istediğin an çık.</p>
           <form class="nl-form" id="nlForm">
             <input type="email" required placeholder="E-posta adresin" aria-label="E-posta">
-            <button type="submit" class="btn btn-lg">Abone Ol</button>
+            <button type="submit" class="btn btn-primary btn-lg">Abone Ol</button>
           </form>
           <p class="nl-note" id="nlNote">Şimdiden 45.000+ okuyucu katıldı.</p>
         </div>
@@ -128,9 +169,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="logo">
-            <span class="logo-mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
-            </span>
+            <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span>
             <span>Form<b>da</b></span>
           </a>
           <p>Spor takviyeleri hakkında bağımsız, kanıta dayalı içerik üreten blog. Bilgilendirme amaçlıdır; sağlık tavsiyesi değildir.</p>
@@ -141,30 +180,30 @@
           </div>
         </div>
         <div class="footer-col">
-          <h4>İçerik</h4>
+          <h4>Kategoriler</h4>
           <ul>
-            <li><a href="#blog">Tüm yazılar</a></li>
-            <li><a href="#kategoriler">Kategoriler</a></li>
-            <li><a href="#">Popüler</a></li>
-            <li><a href="#">İncelemeler</a></li>
+            <li><a href="#blog">Protein</a></li>
+            <li><a href="#blog">Vitamin &amp; Mineral</a></li>
+            <li><a href="#blog">Performans</a></li>
+            <li><a href="#blog">Yağ Yakıcı</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Hızlı Linkler</h4>
+          <ul>
+            <li><a href="#">Ana Sayfa</a></li>
+            <li><a href="#blog">Tüm Yazılar</a></li>
+            <li><a href="#sss">Sıkça Sorulan Sorular</a></li>
+            <li><a href="#magaza">Mağaza</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Kurumsal</h4>
           <ul>
             <li><a href="#">Hakkımızda</a></li>
-            <li><a href="#">İletişim</a></li>
-            <li><a href="#">Reklam</a></li>
-            <li><a href="#">Gizlilik</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Mağaza</h4>
-          <ul>
-            <li><a href="#">Protein</a></li>
-            <li><a href="#">Vitaminler</a></li>
-            <li><a href="#">Performans</a></li>
-            <li><a href="#">Tüm ürünler</a></li>
+            <li><a href="#">Gizlilik Politikası</a></li>
+            <li><a href="#">KVKK Aydınlatma</a></li>
+            <li><a href="#bulten">İletişim</a></li>
           </ul>
         </div>
       </div>

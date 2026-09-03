@@ -5,12 +5,36 @@
    ============================================================ */
 
 const CATEGORIES = [
-  { id: "hepsi", label: "Tümü", icon: "grid" },
-  { id: "protein", label: "Protein", icon: "bolt" },
-  { id: "vitamin", label: "Vitamin & Mineral", icon: "leaf" },
-  { id: "yag-yakici", label: "Yağ Yakıcı", icon: "flame" },
-  { id: "performans", label: "Performans", icon: "activity" },
-  { id: "eklem", label: "Eklem & Kemik", icon: "shield" },
+  { id: "hepsi", label: "Tümü", icon: "grid", hue: 210, desc: "Bütün içerikler" },
+  { id: "protein", label: "Protein", icon: "bolt", hue: 205, desc: "Whey, izolat, gainer" },
+  { id: "vitamin", label: "Vitamin & Mineral", icon: "leaf", hue: 150, desc: "D vitamini, magnezyum, çinko" },
+  { id: "yag-yakici", label: "Yağ Yakıcı", icon: "flame", hue: 20, desc: "Termojenik, L-karnitin" },
+  { id: "performans", label: "Performans", icon: "activity", hue: 265, desc: "Kreatin, pre-workout, BCAA" },
+  { id: "eklem", label: "Eklem & Kemik", icon: "shield", hue: 185, desc: "Omega-3, glutamin, kollajen" },
+];
+
+// Sıkça sorulan sorular (akordiyon)
+const FAQ = [
+  {
+    q: "Takviyeler sağlıklı bireyler için güvenli mi?",
+    a: "Kaliteli ve bağımsız laboratuvar testinden geçmiş takviyeler, önerilen dozlarda çoğu sağlıklı yetişkin için güvenli kabul edilir. Kronik rahatsızlığın varsa ya da ilaç kullanıyorsan mutlaka hekimine danış.",
+  },
+  {
+    q: "İçeriklerdeki ürün linkleri ne anlama geliyor?",
+    a: "Her yazının içinde, o konuyla ilgili örnek bir ürüne yönlendiren bağlantılar bulunur. Bu bağlantılar seni doğrudan mağaza sayfasına götürür; içerik bağımsız biçimde hazırlanır.",
+  },
+  {
+    q: "Whey protein ile bitkisel protein arasındaki fark nedir?",
+    a: "Whey hızlı sindirilen, tam amino asit profiline sahip bir süt proteinidir. Bitkisel proteinler (bezelye, pirinç) laktoz içermez ve vegan dostudur; genelde birden fazla kaynak birleştirilerek amino asit profili tamamlanır.",
+  },
+  {
+    q: "Takviyeleri günün hangi saatinde almalıyım?",
+    a: "Bu, takviyenin türüne göre değişir. Kreatin gün içinde herhangi bir saatte alınabilirken, protein genelde antrenman çevresinde; magnezyum ise uyku kalitesi için akşam tercih edilir.",
+  },
+  {
+    q: "İçerikler bir sağlık tavsiyesi mi?",
+    a: "Hayır. Tüm yazılar bilgilendirme amaçlıdır ve profesyonel sağlık tavsiyesinin yerine geçmez. Kişisel durumun için bir sağlık uzmanına başvur.",
+  },
 ];
 
 // Not: her yazıda "shopUrl" gerçek projede e-ticaret ürün sayfasına gider.
@@ -242,4 +266,4 @@ const STATS = [
   { value: "4.9", label: "Okuyucu puanı" },
 ];
 
-window.SITE_DATA = { CATEGORIES, POSTS, STATS };
+window.SITE_DATA = { CATEGORIES, POSTS, STATS, FAQ };
