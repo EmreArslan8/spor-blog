@@ -1,6 +1,6 @@
-# Ferah — Spor Takviyeleri Blogu (Demo)
+# Formda — Spor Takviyeleri Blogu (Demo)
 
-Modern, **ferah** ve **responsive** bir blog arayüzü demosu. Saf **HTML + CSS + JS**
+Modern, **ferah** ve **responsive** editoryal blog arayüzü demosu. Saf **HTML + CSS + JS**
 ile geliştirildi; hiçbir build adımı veya framework gerektirmez. Mock veri ve
 Unsplash stok görselleri kullanır.
 

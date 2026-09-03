@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yazı — Ferah</title>
+  <title>Yazı — Formda</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -55,7 +55,7 @@
     <div class="container header-inner">
       <a href="index.html" class="logo">
         <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span>
-        <span>Fe<b>rah</b></span>
+        <span>Form<b>da</b></span>
       </a>
       <nav class="nav" aria-label="Ana menü">
         <a href="index.html">Anasayfa</a>
@@ -101,7 +101,7 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom" style="border:0;justify-content:center;">
-        <span>© <span id="year">2025</span> Ferah Blog · Demo amaçlı tasarlanmıştır.</span>
+        <span>© <span id="year">2025</span> Formda Blog · Demo amaçlı tasarlanmıştır.</span>
       </div>
     </div>
   </footer>
@@ -116,10 +116,10 @@
     (function () {
       var params = new URLSearchParams(location.search);
       var id = Number(params.get("id")) || 1;
-      var P = window.FERAH_DATA.POSTS;
+      var P = window.SITE_DATA.POSTS;
       var post = P.find(function (p) { return p.id === id; }) || P[0];
 
-      document.title = post.title + " — Ferah";
+      document.title = post.title + " — Formda";
 
       var body = [
         "<p>Spor takviyeleri dünyası pazarlama vaatleriyle dolu. Bu yazıda <strong>" + post.title.toLowerCase() + "</strong> konusunu abartıya kaçmadan, güncel bilimsel bulgular ışığında ele alıyoruz. Amacımız; ne işe yaradığını, kimin için uygun olduğunu ve nelere dikkat etmen gerektiğini net biçimde aktarmak.</p>",
@@ -136,7 +136,7 @@
 
       document.getElementById("article").innerHTML =
         '<a class="back-link" href="index.html#blog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Tüm yazılar</a>' +
-        '<div class="breadcrumb"><a href="index.html">Ferah</a> › <span>' + post.categoryLabel + "</span></div>" +
+        '<div class="breadcrumb"><a href="index.html">Formda</a> › <span>' + post.categoryLabel + "</span></div>" +
         "<h1>" + post.title + "</h1>" +
         '<div class="article-meta"><div class="card-author"><img src="' + post.authorAvatar + '" alt="' + post.author + '"><span class="an">' + post.author + "</span></div><span class=\"sep\" style=\"width:3px;height:3px;border-radius:50%;background:var(--text-mute)\"></span><span>" + post.date + "</span><span>· " + post.readTime + " dk okuma</span></div>" +
         '<div class="article-hero"><img src="' + post.image + '" alt="' + post.title + '"></div>' +

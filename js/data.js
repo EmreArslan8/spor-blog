@@ -1,5 +1,5 @@
 /* ============================================================
-   Ferah — Spor Takviyeleri Blogu
+   Formda — Spor Takviyeleri Blogu
    Mock veri katmanı. Gerçek bir API yerine kullanılan örnek veri.
    Görseller: Unsplash (stok, ücretsiz kullanım).
    ============================================================ */
@@ -242,4 +242,4 @@ const STATS = [
   { value: "4.9", label: "Okuyucu puanı" },
 ];
 
-window.FERAH_DATA = { CATEGORIES, POSTS, STATS };
+window.SITE_DATA = { CATEGORIES, POSTS, STATS };

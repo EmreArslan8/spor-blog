@@ -1,12 +1,12 @@
 /* ============================================================
-   Ferah — etkileşim katmanı
+   Formda — etkileşim katmanı
    Arama, kategori filtreleme, dark mode, mobil menü,
    scroll animasyonları, "yukarı çık", bülten formu.
    ============================================================ */
 (function () {
   "use strict";
 
-  const { CATEGORIES, POSTS } = window.FERAH_DATA;
+  const { CATEGORIES, POSTS } = window.SITE_DATA;
 
   /* ---- Küçük SVG ikon kütüphanesi (satır içi) ---- */
   const ICON = {
@@ -20,7 +20,7 @@
 
   /* ---- 1. Tema (dark mode) ---- */
   const root = document.documentElement;
-  const stored = localStorage.getItem("ferah-theme");
+  const stored = localStorage.getItem("formda-theme");
   if (stored) root.setAttribute("data-theme", stored);
   else if (window.matchMedia("(prefers-color-scheme: dark)").matches) root.setAttribute("data-theme", "dark");
 
@@ -39,7 +39,7 @@
     const dark = root.getAttribute("data-theme") === "dark";
     const next = dark ? "light" : "dark";
     root.setAttribute("data-theme", next);
-    localStorage.setItem("ferah-theme", next);
+    localStorage.setItem("formda-theme", next);
     syncThemeIcon();
   });
   syncThemeIcon();
@@ -89,9 +89,8 @@
     const popular = POSTS.filter((p) => p.id !== lead.id).slice(2, 6);
 
     leadEl.innerHTML = `
-      <img src="${lead.image}" alt="${lead.title}">
       <div class="lead-body">
-        <span class="kicker">${lead.categoryLabel}</span>
+        <span class="feat">★ Öne çıkan yazı</span>
         <h2><a href="post.html?id=${lead.id}">${lead.title}</a></h2>
         <p>${lead.excerpt}</p>
         <div class="byline">
@@ -101,6 +100,10 @@
           <span>${lead.readTime} dk okuma</span>
         </div>
         <a class="shop-link" href="${lead.shopUrl}" data-shop="${lead.title}">Yazıdaki ürünü incele ${ICON.arrow}</a>
+      </div>
+      <div class="lead-media">
+        <span class="tag">${lead.categoryLabel}</span>
+        <img src="${lead.image}" alt="${lead.title}">
       </div>`;
 
     if (sideEl) {

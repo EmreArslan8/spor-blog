@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ferah — Spor Takviyeleri Blogu</title>
+  <title>Formda — Spor Takviyeleri Blogu</title>
   <meta name="description" content="Spor takviyeleri hakkında bilimsel, bağımsız ve sade içerikler. Protein, vitamin, performans ve daha fazlası.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
         <span class="logo-mark" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
         </span>
-        <span>Fe<b>rah</b></span>
+        <span>Form<b>da</b></span>
       </a>
 
       <nav class="nav" aria-label="Ana menü">
@@ -50,28 +50,30 @@
   </div>
 
   <main>
-    <!-- ============ MANŞET (dergi tipi) ============ -->
-    <section class="masthead">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
       <div class="container">
-        <div>
+        <div class="hero-head reveal in">
+          <span class="eyebrow"><span class="dot"></span> Bağımsız · Bilimsel · Reklamsız</span>
           <h1>Takviyeyi <em>anla</em>, kanıta göre seç.</h1>
-          <p>Spor takviyeleri üzerine bağımsız, bilimsel ve sade içerikler — pazarlama değil, gerçekler.</p>
-        </div>
-        <div class="date-badge" id="today"></div>
-      </div>
-    </section>
-
-    <div class="container"><div class="rule"></div></div>
-
-    <section style="padding-bottom: clamp(20px,4vw,40px)">
-      <div class="container lead-grid">
-        <article class="lead reveal in" id="lead"><!-- JS --></article>
-        <div class="lead-side reveal in">
-          <div id="leadSide"><!-- ikincil hikâyeler --></div>
-          <div class="popular">
-            <h4>En çok okunanlar</h4>
-            <ol id="popularList"><!-- JS --></ol>
+          <p>Spor takviyeleri üzerine sade, kanıta dayalı rehberler — ne işe yarar, kime uygun ve doğru ürün hangisi.</p>
+          <div class="hero-actions">
+            <a href="#blog" class="btn btn-primary btn-lg">Yazıları oku
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#kategoriler" class="btn btn-outline btn-lg">Kategorilere bak</a>
           </div>
+        </div>
+
+        <div class="lead-grid">
+          <article class="lead reveal in" id="lead"><!-- JS --></article>
+          <aside class="lead-side reveal in">
+            <div id="leadSide"><!-- ikincil hikâyeler --></div>
+            <div class="popular">
+              <h4>En çok okunanlar</h4>
+              <ol id="popularList"><!-- JS --></ol>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -108,7 +110,7 @@
       <div class="container">
         <div class="newsletter-inner reveal">
           <span class="kicker">Bülten</span>
-          <h2>Haftalık ferah bülten</h2>
+          <h2>Haftalık Formda bülteni</h2>
           <p>Yeni incelemeler, indirim fırsatları ve bilimsel ipuçları e-postana gelsin. Spam yok, istediğin an çık.</p>
           <form class="nl-form" id="nlForm">
             <input type="email" required placeholder="E-posta adresin" aria-label="E-posta">
@@ -129,7 +131,7 @@
             <span class="logo-mark" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
             </span>
-            <span>Fe<b>rah</b></span>
+            <span>Form<b>da</b></span>
           </a>
           <p>Spor takviyeleri hakkında bağımsız, kanıta dayalı içerik üreten blog. Bilgilendirme amaçlıdır; sağlık tavsiyesi değildir.</p>
           <div class="socials">
@@ -167,7 +169,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span id="year">2025</span> Ferah Blog. Tüm hakları saklıdır.</span>
+        <span>© <span id="year">2025</span> Formda Blog. Tüm hakları saklıdır.</span>
         <span>Demo amaçlı tasarlanmıştır · Görseller: Unsplash</span>
       </div>
     </div>
@@ -178,15 +180,6 @@
   </button>
 
   <script src="js/data.js"></script>
-  <script>
-    // Manşet tarih rozeti
-    (function () {
-      var el = document.getElementById("today");
-      if (el) {
-        el.textContent = new Date().toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
-      }
-    })();
-  </script>
   <script src="js/main.js"></script>
 </body>
 </html>
