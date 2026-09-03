@@ -85,7 +85,7 @@
       .map(
         (c) => `
       <a class="mega-item" href="#blog" data-cat="${c.id}">
-        <span class="mega-ic" style="background:linear-gradient(135deg,hsl(${c.hue},80%,55%),hsl(${c.hue + 25},80%,45%))">${ICON[c.icon] || ICON.grid}</span>
+        <span class="mega-ic" style="background:hsl(${c.hue},70%,52%)">${ICON[c.icon] || ICON.grid}</span>
         <span><span class="mt">${c.label}</span><br><span class="md">${c.desc}</span></span>
       </a>`
       )

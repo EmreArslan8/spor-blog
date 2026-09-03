@@ -263,7 +263,6 @@ const STATS = [
   { value: "120+", label: "Bilimsel içerik" },
   { value: "45K", label: "Aylık okuyucu" },
   { value: "%100", label: "Bağımsız inceleme" },
-  { value: "4.9", label: "Okuyucu puanı" },
 ];
 
 /* ------------------------------------------------------------
